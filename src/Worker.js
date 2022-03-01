@@ -1,6 +1,6 @@
-import Button from "Common"
+import { Button } from "./Common"
 
-function Doctor() {
+function Worker() {
     return (
         <div className="Doctor">
             <div>Nurse/Doctor</div>
@@ -11,4 +11,4 @@ function Doctor() {
     )
 }
 
-export default Doctor
+export default Worker
