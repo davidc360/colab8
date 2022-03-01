@@ -1,22 +1,26 @@
 .App 
-  text-align: center
+    text-align: center
+    max-width: 600px
+    margin-left: auto
+    margin-right: auto
+    display: flex
+    justify-content: center
 
-.Button
-    all: unset
-    cursor: pointer
-    border: 1px solid black
-    width: 10em
-    padding: 0.7em
-    background-color: rgb(221, 221, 221)
-    border-radius: 2px
-
-    &:hover
-      background-color: darken(rgb(221, 221, 221), 10% )
-
-.Home
+.column
     display: flex
     flex-direction: column
     justify-content: center
     align-items: center
     gap: 1.5em
     min-height: 100vh
+
+.Button
+    all: unset
+    cursor: pointer
+    width: 10em
+    padding: 1em
+    background-color: rgb(228, 250, 231)
+    border-radius: 2px
+
+    &:hover
+      background-color: darken(rgb(228, 250, 231), 10% )
