@@ -14,7 +14,7 @@ function Employee({ id }) {
                 <div>{role}</div>
             </div>
             <div className="employee-buttons">
-                <Button text="New Patient Intake" />
+                <Button text="New Patient Intake" link="/intake"/>
                 <Button text="Search Patient Intake" />
             </div>
         </div>
