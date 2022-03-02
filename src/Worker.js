@@ -1,11 +1,14 @@
 import { Button } from "./Common"
 import './Worker.sass'
 
+
 function Worker() {
     return (
         <div className="Doctor column">
             <div className="worker-heading">Nurse/Doctor</div>
-            <div className="doctor-list"></div>
+            <div className="worker-list">
+                <Button text="Bruno Rodriguez" link="/employee" className="worker-item" />
+            </div>
             <div className="worker-buttons">
                 <Button text="Last Name" />           
                 <Button className="worker-search">
