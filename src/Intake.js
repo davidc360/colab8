@@ -68,6 +68,19 @@ function BasicInfo({ language }) {
             "电子邮件",
             "电话号码"
         ],
+        Japanese: [
+            "名",
+            "姓",
+            "生年月日",
+            "性別",
+            "配偶者",
+            "住所",
+            "町",
+            "県",
+            "国",
+            "メールアドレス",
+            "電話番号"
+        ]
     }
     const translatedPrompts = formPrompts[language]
     const inputs = translatedPrompts.map(prompt => <FormInput key={prompt} prompt={prompt} value=""/>)
