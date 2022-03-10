@@ -83,7 +83,7 @@ function BasicInfo({ language }) {
         ]
     }
     const translatedPrompts = formPrompts[language]
-    const inputs = translatedPrompts.map(prompt => <FormInput key={prompt} prompt={prompt} value=""/>)
+    const inputs = translatedPrompts.map((prompt, i) => <FormInput key={prompt} prompt={prompt} promptEnglish={ formPrompts.English[i] } value=""/>)
     return (
         <div className="basicInfo">
             {inputs}
@@ -91,10 +91,24 @@ function BasicInfo({ language }) {
     )
 }
 
-function FormInput({ prompt, value }) {
+function FormInput({ prompt, value, promptEnglish }) {
+    const [flipped, setFlipped] = useState(false)
+    const toggleFlip = () => {
+        setFlipped(!flipped)
+    }
+    const isEnglish = promptEnglish === prompt
     return (
         <div className="formInput">
-            <Button className="form-prompt">{prompt}</Button>
+            <div className="flip-card">
+                <div className={`flip-card-inner ${flipped ? "flipped" : ""}`} onClick={!isEnglish && toggleFlip}>
+                    <div className="card">
+                        <Button className="form-prompt" onClick={() => { }}>{prompt}</Button>
+                    </div>
+                    <div className="card card-back">
+                        <Button className="form-prompt" onClick={() => { }}>{promptEnglish}</Button>
+                    </div>
+                </div>
+            </div>
             <input type="text" className="form-input" />
         </div>
     )

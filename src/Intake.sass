@@ -35,3 +35,25 @@
 
     > img
         height: 1em
+
+.flip-card
+    perspective: 1000px
+    position: relative
+    width: 200px
+
+.flip-card-inner 
+    transition: transform 0.8s
+    transform-style: preserve-3d
+
+.card
+    backface-visibility: hidden
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+
+.card-back
+    transform: rotateY(180deg)
+
+.flipped
+    transform: rotateY(180deg)
