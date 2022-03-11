@@ -14,7 +14,7 @@ function Intake() {
     return (
         <div className="Intake column">
             <div className="language-picker">
-                <div>{flags[language]}</div>
+                <span>{flags[language]} </span>
                 <select onChange={changeLanguage}>
                     <option value="English">English</option>
                     <option value="Japanese">Japanese</option>
@@ -80,7 +80,20 @@ function BasicInfo({ language }) {
             "国",
             "メールアドレス",
             "電話番号"
-        ]
+        ], 
+        Spanish: [
+            "First Name",
+            "Last Name",
+            "Date of Birth",
+            "Sex",
+            "Marital Status",
+            "Address",
+            "City",
+            "State",
+            "Country",
+            "E-mail",
+            "Phone Number"
+        ],
     }
     const translatedPrompts = formPrompts[language]
     const inputs = translatedPrompts.map((prompt, i) => <FormInput key={prompt} prompt={prompt} promptEnglish={ formPrompts.English[i] } value=""/>)
