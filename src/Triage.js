@@ -7,13 +7,15 @@ function Triage() {
 
     return (
         <div>
-            <Question question={question} responses={responses}/>
+            <Question
+                question={question}
+                responses={<MultiChoice options={responses} />} />
         </ div>
     )
 }
 
-function Question({ question, responses }) {
-    const resButtons = responses.map((res, i) => {
+function MultiChoice({ options }) {
+    const resButtons = options.map((res, i) => {
         return <Button key={res} text={res} className={
             ` ${i === 1 ? "green" : i === 0 ? "red" : "regular"}
             choice
@@ -22,11 +24,17 @@ function Question({ question, responses }) {
     })
 
     return (
+        <div className="multi-choice">
+            {resButtons}
+        </div>
+    )
+}
+
+function Question({ question, responses }) {
+    return (
         <div>
             <Button className="question">🇺🇸 {question}</Button>
-            <div>
-                {resButtons}
-            </div>
+            {responses}
         </div>
     )
 }
