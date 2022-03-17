@@ -2,17 +2,15 @@ import { Button } from './Common'
 import './Triage.sass'
 
 function Triage() {
-    const question = 'Are you in pain?'
-    const responses = ["no", "yes"]
-
     return (
         <div className="triage">
             <Question
-                question={question}
-                responses={<MultiChoice options={responses} />} />
+                question='Are you in pain?'
+                responses={<MultiChoice options={["no", "yes"]} />}
+            />
 
             <Question
-                question={question}
+                question="What level is your pain on a level of 0-10?"
                 responses={<Slider />} />
         </ div>
     )
