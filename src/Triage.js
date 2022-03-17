@@ -6,10 +6,14 @@ function Triage() {
     const responses = ["no", "yes"]
 
     return (
-        <div>
+        <div className="triage">
             <Question
                 question={question}
                 responses={<MultiChoice options={responses} />} />
+
+            <Question
+                question={question}
+                responses={<Slider />} />
         </ div>
     )
 }
@@ -26,6 +30,14 @@ function MultiChoice({ options }) {
     return (
         <div className="multi-choice">
             {resButtons}
+        </div>
+    )
+}
+
+function Slider() {
+    return (
+        <div className="slider">
+            <input type="range" min="1" max="100" defaultValue="50" class="slider" />
         </div>
     )
 }
