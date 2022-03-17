@@ -11,7 +11,13 @@ function Triage() {
 
             <Question
                 question="What level is your pain on a level of 0-10?"
-                responses={<Slider />} />
+                responses={<Slider />}
+            />
+
+            <Question
+                question="Are you having difficulty breathing/swallowing?"
+                responses={<MultiChoice options={["no", "yes"]} />}
+            />
         </ div>
     )
 }
@@ -26,7 +32,7 @@ function MultiChoice({ options }) {
     })
 
     return (
-        <div className="multi-choice">
+        <div className="multiChoice">
             {resButtons}
         </div>
     )
@@ -42,7 +48,7 @@ function Slider() {
 
 function Question({ question, responses }) {
     return (
-        <div>
+        <div className="questionCtn">
             <Button className="question">🇺🇸 {question}</Button>
             {responses}
         </div>
