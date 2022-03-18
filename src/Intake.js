@@ -10,7 +10,8 @@ function Intake() {
     const flags = {
         English: "🇺🇸",
         Chinese: "🇨🇳",
-        Japanese: "🇯🇵"
+        Japanese: "🇯🇵",
+        Spanish: "🇪🇸",
     }
 
     function changeLanguage(e) {
