@@ -1,6 +1,7 @@
 import { useState } from "react"
 import "./Intake.sass"
 import { Button } from "./Common"
+import { useEffect } from "react"
 function Intake() {
     const [language, setLanguage] = useState("English")
     const flags = {
@@ -8,9 +9,11 @@ function Intake() {
         Chinese: "🇨🇳",
         Japanese: "🇯🇵"
     }
+
     function changeLanguage(e) {
         setLanguage(e.target.value)
     }
+
     return (
         <div className="Intake column">
             <div className="language-picker">
@@ -41,62 +44,52 @@ function Intake() {
 
 function BasicInfo({ language }) {
     // get translations from database
-    const formPrompts = {
-        English: [
-            "First Name",
-            "Last Name",
-            "Date of Birth",
-            "Sex",
-            "Marital Status",
-            "Address",
-            "City",
-            "State",
-            "Country",
-            "E-mail",
-            "Phone Number"
-        ],
-        Chinese: [
-            "名字",
-            "姓氏",
-            "出生日期",
-            "性别",
-            "婚姻状况",
-            "地址",
-            "城市",
-            "州",
-            "国家",
-            "电子邮件",
-            "电话号码"
-        ],
-        Japanese: [
-            "名",
-            "姓",
-            "生年月日",
-            "性別",
-            "配偶者",
-            "住所",
-            "町",
-            "県",
-            "国",
-            "メールアドレス",
-            "電話番号"
-        ], 
-        Spanish: [
-            "First Name",
-            "Last Name",
-            "Date of Birth",
-            "Sex",
-            "Marital Status",
-            "Address",
-            "City",
-            "State",
-            "Country",
-            "E-mail",
-            "Phone Number"
-        ],
-    }
-    const translatedPrompts = formPrompts[language]
-    const inputs = translatedPrompts.map((prompt, i) => <FormInput key={prompt} prompt={prompt} promptEnglish={ formPrompts.English[i] } value=""/>)
+    const formKeys = [
+        "first_name",
+        "last_name",
+        "date_of_birth",
+        "sex",
+        "marital_status",
+        "address",
+        "city",
+        "state",
+        "country",
+        "email_address",
+        "phoneNumber"
+    ]
+
+    const englishPrompts = [
+        "First Name",
+        "Last Name",
+        "Date of Birth",
+        "Sex",
+        "Marital Status",
+        "Address",
+        "City",
+        "State",
+        "Country",
+        "E-mail",
+        "Phone Number"
+    ]
+
+    const [forms, setForms] = useState({})
+    useEffect(() => {
+        if (language === "English") return
+        fetch('https://transmed-golang.herokuapp.com/health/form-field/fields/retrieve/' + language.toLowerCase())
+            .then(res => res.json())
+            .then(data => {
+                setForms(data)
+                console.log(data)
+            })
+     }, [language])
+    
+    const translatedPrompts = language === "English" ? englishPrompts
+    : formKeys.map(key => {
+        if (key === "phoneNumber") key = "phone_number"
+        return forms[key + "_lang"]
+    })
+
+    const inputs = translatedPrompts.map((prompt, i) => <FormInput key={i} prompt={prompt} promptEnglish={ englishPrompts[i] } value=""/>)
     return (
         <div className="basicInfo">
             {inputs}
@@ -113,7 +106,7 @@ function FormInput({ prompt, value, promptEnglish }) {
     return (
         <div className="formInput">
             <div className="flip-card">
-                <div className={`flip-card-inner ${flipped ? "flipped" : ""}`} onClick={!isEnglish && toggleFlip}>
+                <div className={`flip-card-inner ${flipped ? "flipped" : ""}`} onClick={!isEnglish ? toggleFlip : null}>
                     <div className="card">
                         <Button className="form-prompt" onClick={() => { }}>{prompt}</Button>
                     </div>
