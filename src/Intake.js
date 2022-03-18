@@ -2,7 +2,10 @@ import { useState } from "react"
 import "./Intake.sass"
 import { Button } from "./Common"
 import { useEffect } from "react"
+import Triage from "./Triage"
+
 function Intake() {
+    const [page, setPage] = useState(0)
     const [language, setLanguage] = useState("English")
     const flags = {
         English: "🇺🇸",
@@ -12,6 +15,10 @@ function Intake() {
 
     function changeLanguage(e) {
         setLanguage(e.target.value)
+    }
+
+    function updatePage(e) {
+        setPage((page + 1) % 2)
     }
 
     return (
@@ -26,8 +33,15 @@ function Intake() {
                 </select>
             </div>
             <div className="intake-form">
-                <BasicInfo language={language}/>
+                {
+                    page === 0 ?
+                        <BasicInfo language={language} />
+                        : <Triage />
+                }
             </div>
+            <Button className={`page ${page ? "prev" : ""}`} link="/triage" onClick={updatePage}>
+                >
+            </Button>
             <div className="form-buttons">
                 <Button className="form-button" link="/">
                     <img src="https://img.icons8.com/ios-glyphs/30/000000/home.png"/>
